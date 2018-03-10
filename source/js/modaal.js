@@ -718,39 +718,46 @@
 					'opacity': 0
 				});
 
-				// Collect doc width
-				var doc_width = $(document).width();
-				var width_threshold = doc_width > 1140 ? 280 : 50;
+				var animateOptions = {};
 
-				// start toggle to 'is_next'
-				new_img_w = this_gallery.find('.modaal-gallery-item.is_next').width();
-				new_img_h = this_gallery.find('.modaal-gallery-item.is_next').height();
+				if(self.options.animation !== "none") {
+					// Collect doc width
+					var doc_width = $(document).width();
+					var width_threshold = doc_width > 1140 ? 280 : 50;
 
-				var new_natural_w = this_gallery.find('.modaal-gallery-item.is_next img').prop('naturalWidth');
-				var new_natural_h = this_gallery.find('.modaal-gallery-item.is_next img').prop('naturalHeight');
+					// start toggle to 'is_next'
+					new_img_w = this_gallery.find('.modaal-gallery-item.is_next').width();
+					new_img_h = this_gallery.find('.modaal-gallery-item.is_next').height();
 
-				// if new image is wider than doc width
-				if ( new_natural_w > (doc_width - width_threshold) ) {
-					// set new width just below doc width
-					new_img_w = doc_width - width_threshold;
+					var new_natural_w = this_gallery.find('.modaal-gallery-item.is_next img').prop('naturalWidth');
+					var new_natural_h = this_gallery.find('.modaal-gallery-item.is_next img').prop('naturalHeight');
 
-					// Set temp widths so we can calulate the correct height;
-					this_gallery.find('.modaal-gallery-item.is_next').css({ 'width': new_img_w });
-					this_gallery.find('.modaal-gallery-item.is_next img').css({ 'width': new_img_w });
+					// if new image is wider than doc width
+					if ( new_natural_w > (doc_width - width_threshold) ) {
+						// set new width just below doc width
+						new_img_w = doc_width - width_threshold;
 
-					// Set new height variable
-					new_img_h = this_gallery.find('.modaal-gallery-item.is_next').find('img').height();
-				} else {
-					// new img is not wider than screen, so let's set the new dimensions
-					new_img_w = new_natural_w;
-					new_img_h = new_natural_h;
+						// Set temp widths so we can calulate the correct height;
+						this_gallery.find('.modaal-gallery-item.is_next').css({ 'width': new_img_w });
+						this_gallery.find('.modaal-gallery-item.is_next img').css({ 'width': new_img_w });
+
+						// Set new height variable
+						new_img_h = this_gallery.find('.modaal-gallery-item.is_next').find('img').height();
+					} else {
+						// new img is not wider than screen, so let's set the new dimensions
+						new_img_w = new_natural_w;
+						new_img_h = new_natural_h;
+					}
+
+					animateOptions = {
+						'width': new_img_w,
+						'height': new_img_h
+					};
 				}
 
 				// resize gallery region
-				this_gallery.find('.modaal-gallery-item-wrap').stop().animate({
-					'width': new_img_w,
-					'height': new_img_h
-				}, duration, function() {
+				this_gallery.find('.modaal-gallery-item-wrap').stop().animate(
+				animateOptions, duration, function() {
 					// hide old active image
 					current_item.removeClass(self.private_options.active_class + ' ' + self.options.gallery_active_class).removeAttr('style');
 					current_item.find('img').removeAttr('style');
