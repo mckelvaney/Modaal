@@ -762,10 +762,6 @@
 					incoming_item.stop().animate({
 						opacity: 1
 					}, duration, function(){
-						$(this).removeAttr('style').css({
-							'width': '100%'
-						});
-						$(this).find('img').css('width', '100%');
 
 						// remove dimension lock
 						this_gallery.find('.modaal-gallery-item-wrap').removeAttr('style');
