@@ -627,7 +627,7 @@
 
 					// for each item build up the markup
 					modaal_image_markup += '<div class="modaal-gallery-item gallery-item-' + i + is_active + '" aria-label="' + aria_label + '">' +
-						'<img src="' + gallery[i].url + '" alt=" " style="width:100%">' +
+						'<img src="' + gallery[i].url + '" alt=" ">' +
 						gallery[i].desc +
 					'</div>';
 				}
@@ -653,7 +653,7 @@
 
 				// build up the html
 				modaal_image_markup = '<div class="modaal-gallery-item is_active" aria-label="' + aria_label + '">' +
-					'<img src="' + this_img_src + '" alt=" " style="width:100%">' +
+					'<img src="' + this_img_src + '" alt=" ">' +
 					this_img_alt +
 				'</div>';
 			}
